@@ -1,0 +1,59 @@
+
+.conversion__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 450px;
+    border: 2px solid rgb(97, 92, 92);
+    width: 500px; 
+    .conversion__category{ 
+      .conversion__category__selection{
+        width: 400px;
+      }
+      .conversion-additional-selection {
+        opacity: 0.75;
+        font-size: 0.75em;
+      }
+    }
+    .conversion__input__container{ 
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      
+      .conversion__input__1,
+      .conversion__input__2{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        flex-direction: column;
+        .conversion__input__selection{
+          width: 200px;
+          padding: 5px;
+          margin-top: -25px;
+        }
+      }
+    }
+    .conversion__details{ 
+      display: flex;
+        justify-content: center;
+        align-items: center;  
+        .conversion__action{
+          width: 200px;
+          padding: 5px; 
+          margin: 10px;
+        }
+    }
+
+    .conversion__reset{ 
+      display: flex;
+        justify-content: center;
+        align-items: center;  
+        .conversion__reset{
+          width: 420px;
+          padding: 5px;  
+          margin: 10px;
+        }
+    }
+}
+

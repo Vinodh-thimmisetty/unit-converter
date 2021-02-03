@@ -1,10 +1,14 @@
-FROM node:14.1-alpine AS builder
-WORKDIR /opt/web
-COPY package.json package-lock.json ./
+FROM alpine/git AS GIT_REPO
+WORKDIR /app
+RUN git clone https://github.com/Vinodh-thimmisetty/ayoholdings.git
+
+FROM node:12.19.0 as NODEJS
+WORKDIR /app/ayoholdings/conversion-ui
+COPY --from=GIT_REPO /app/ayoholdings /app/ayoholdings
 RUN npm install
-ENV PATH="./node_modules/.bin:$PATH"
-COPY . ./
-RUN ng build --prod
-FROM nginx:1.17-alpine
-COPY nginx.config /etc/nginx/conf.d/default.conf
-COPY --from=builder /opt/web/dist/notes /usr/share/nginx/html
+COPY . .
+EXPOSE 4200
+CMD npm start
+
+# docker pull vinodh5052/conversion_ui
+# docker run -d -p 4200:4200 conversion_ui

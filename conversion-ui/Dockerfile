@@ -1,14 +1,13 @@
-FROM alpine/git AS GIT_REPO
-WORKDIR /app
-RUN git clone https://github.com/Vinodh-thimmisetty/ayoholdings.git
-
-FROM node:12.19.0 as NODEJS
-WORKDIR /app/ayoholdings/conversion-ui
-COPY --from=GIT_REPO /app/ayoholdings /app/ayoholdings
+### STAGE 1: Build ###
+FROM node:12.7-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json ./
 RUN npm install
 COPY . .
-EXPOSE 4200
-CMD npm start
+RUN npm run build
 
-# docker pull vinodh5052/conversion_ui
-# docker run -d -p 4200:4200 conversion_ui
+### STAGE 2: Run ###
+FROM nginx:1.17.1-alpine
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY --from=build /usr/src/app/dist/conversion-ui /usr/share/nginx/html
+EXPOSE 80

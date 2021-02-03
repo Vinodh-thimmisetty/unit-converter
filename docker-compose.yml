@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  #Back-end Spring Boot Application
+  conversion-api:
+    build: ./conversion-api
+    container_name: conversion-api
+    ports:
+      - 9898:9898
+  #Fron-end Angular Application
+  conversion-ui:
+    build: ./conversion-ui
+    container_name: conversion-ui
+    ports:
+      - 4200:4200
+    links:
+      - conversion-api
